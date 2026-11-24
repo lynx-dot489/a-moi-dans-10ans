@@ -1,121 +1,32 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f7eee8">
-  <meta name="description" content="Une surprise d'anniversaire créée avec amour pour Flore.">
-  <title>Pour Flore ♡</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Italiana&family=Parisienne&display=swap" rel="stylesheet">
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090c26"><meta name="description" content="Une expérience céleste créée pour Flore.">
+  <title>Pour Flore — Une constellation à découvrir</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Italiana&family=Parisienne&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="extras.css">
 </head>
 <body>
-  <div class="grain" aria-hidden="true"></div>
-  <canvas id="petals" aria-hidden="true"></canvas>
-
-  <header class="topbar">
-    <button class="brand" type="button" data-go="home" aria-label="Revenir à l'accueil"><span>F</span> Flore</button>
-    <div class="audio-player">
-      <button id="musicToggle" class="music-toggle" type="button" aria-label="Activer la musique" aria-pressed="false"><span class="play-icon"></span></button>
-      <span class="track-name">Notre mélodie</span>
-      <input id="volume" type="range" min="0" max="1" step="0.05" value="0.35" aria-label="Volume">
-      <audio id="music" preload="metadata" loop src="assets/music.mp3"></audio>
-    </div>
-  </header>
-
+  <div class="stars" aria-hidden="true"></div><canvas id="confetti" aria-hidden="true"></canvas>
+  <header class="topbar"><a class="brand" href="#intro" aria-label="Retour au début"><span>F</span> FLORE</a><div class="top-actions"><button id="musicToggle" class="icon-btn" type="button" aria-pressed="false" title="Activer la musique">♪</button><button id="menuToggle" class="icon-btn menu-btn" type="button" aria-label="Ouvrir le menu">☰</button></div><nav id="siteNav" aria-label="Navigation principale"><a href="#letter">Lettre</a><a href="#reasons">10 raisons</a><a href="#surprises">Surprises</a><a href="#universe">Univers</a><a href="#gifts">Cadeaux</a></nav></header>
   <main>
-    <section class="panel active" id="home" aria-labelledby="home-title">
-      <div class="orb orb-one"></div><div class="orb orb-two"></div>
-      <div class="home-content reveal">
-        <p class="eyebrow">Une surprise rien que pour toi</p>
-        <h1 id="home-title"><span>F</span><span>L</span><span>O</span><span>R</span><span>E</span></h1>
-        <p class="mystery">Aujourd'hui n'est pas un jour comme les autres...</p>
-        <p class="intro-copy">Quelqu'un d'exceptionnel mérite quelque chose d'exceptionnel.</p>
-        <button class="primary" type="button" data-go="gift">Découvrir ma surprise <span>♡</span></button>
-      </div>
-      <p class="scroll-mark">Déplier l'histoire <b>↓</b></p>
-    </section>
+    <section id="intro" class="hero section-dark"><div class="hero-glow"></div><p class="eyebrow">UNE SURPRISE RIEN QUE POUR TOI</p><h1><span>F</span><span>L</span><span>O</span><span>R</span><span>E</span></h1><p class="hero-sub">Il existe des personnes qui rendent le monde plus doux.<br><em>Tu es l'une d'elles.</em></p><button class="primary" data-scroll="#letter">Commencer l'aventure <b>✦</b></button><p class="scroll-hint">Fais défiler pour découvrir <i>↓</i></p></section>
 
-    <section class="panel gift-panel" id="gift" aria-labelledby="gift-title">
-      <div class="gift-layout">
-        <div>
-          <p class="eyebrow">Pour toi, spécialement</p>
-          <h2 id="gift-title">Il y a des cadeaux qu'on ouvre...<br><em>et celui-là se vit.</em></h2>
-        </div>
-        <button class="gift-box" id="giftBox" type="button" aria-label="Ouvrir le cadeau">
-          <span class="box-lid"><i></i></span><span class="box-body"><i class="ribbon"></i></span>
-          <span class="gift-spark s1">✦</span><span class="gift-spark s2">✧</span><span class="gift-spark s3">·</span>
-        </button>
-        <p class="gift-hint" id="giftHint">Appuie sur le cadeau pour l'ouvrir</p>
-      </div>
-    </section>
+    <section id="letter" class="section paper-section"><div class="section-intro"><p class="eyebrow">01 — UNE CORRESPONDANCE PRÉCIEUSE</p><h2>À ma moitié,<br><em>ma sœur d'une autre mère.</em></h2></div><div class="envelope-wrap"><button id="envelope" class="envelope" type="button" aria-expanded="false" aria-label="Ouvrir la lettre"><span class="env-paper">Une lettre pour Flore</span><span class="env-seal">F</span></button><article id="letterPaper" class="letter-card" aria-live="polite"><p class="script">Pour toi, Flore</p><p>Il y a des présences qui changent silencieusement le monde autour d'elles. La tienne fait partie de celles-là.</p><p>Tu es <strong>ma moitié</strong>, <strong>ma sœur d'une autre mère</strong>, ma complice et ma personne spéciale. Avec toi, les fous rires deviennent des souvenirs, les silences sont confortables et même les journées ordinaires ont quelque chose de précieux.</p><p>Merci pour ta vérité, ton courage, ta façon de rendre les choses plus légères et pour tous ces moments où nous nous sommes comprises sans avoir besoin de parler.</p><p>Pour cette nouvelle année, je te souhaite des rêves immenses, des surprises douces et tout le bonheur que tu offres autour de toi. Je suis infiniment reconnaissante de t'avoir dans ma vie.</p><p class="signature">Avec toute mon affection,<br><b>Ta moitié. ♡</b></p><button class="continue" data-scroll="#reasons">Continuer notre aventure ✨</button></article></div></section>
 
-    <section class="panel letter-panel" id="letter" aria-labelledby="letter-title">
-      <div class="letter-stage">
-        <button class="envelope" id="envelope" type="button" aria-label="Ouvrir l'enveloppe">
-          <span class="seal">F</span><span class="env-back"></span><span class="env-letter"></span><span class="env-front"></span>
-        </button>
-        <article class="letter" id="letterPaper">
-          <p class="letter-kicker">Une lettre pour toi</p>
-          <h2 id="letter-title">À ma moitié,<br><em>ma sœur d'une autre mère...</em></h2>
-          <div class="letter-copy">
-            <p>Flore, il y a des présences qui changent silencieusement le monde autour d'elles. La tienne fait partie de celles-là.</p>
-            <p>Tu es bien plus qu'une amie. Tu es le rire au milieu du bruit, la vérité quand tout devient compliqué, celle dont la présence fait simplement du bien.</p>
-            <p>Merci pour chaque fou rire sans raison, chaque confidence sur laquelle on pouvait compter, chaque moment où on s'est compris sans avoir besoin d'en dire trop.</p>
-            <p>Merci d'être exactement toi. Mon souhait pour cette nouvelle année est simple : que ta vie te rende tout l'amour, la douceur et les belles surprises que tu offres aux autres.</p>
-            <p>Tu es la personne exceptionnelle que je suis fière d'avoir près de moi.</p>
-          </div>
-          <p class="signature">Avec toute mon affection,<br><strong>Ta moitié. ♡</strong></p>
-          <button class="text-link close-letter" type="button">Refermer la lettre</button>
-        </article>
-      </div>
-    </section>
+    <section id="reasons" class="section lavender"><div class="section-intro"><p class="eyebrow">02 — QUELQUES PREUVES</p><h2>10 raisons pour lesquelles<br><em>tu es absolument unique</em></h2><p>Clique sur chaque constellation pour révéler un petit mot.</p></div><div id="reasonGrid" class="reason-grid"></div></section>
 
-    <section class="panel reasons-panel" id="reasons" aria-labelledby="reasons-title">
-      <div class="section-heading"><p class="eyebrow">Quelques preuves</p><h2 id="reasons-title">Les 10 raisons pour lesquelles<br><em>tu es absolument unique</em></h2></div>
-      <div class="reason-grid" id="reasonGrid"></div>
-      <p class="card-tip">Touchez une carte pour retourner l'univers ♡</p>
-    </section>
+    <section id="surprises" class="section section-dark surprises"><div class="section-intro"><p class="eyebrow">03 — LE COIN DES SURPRISES</p><h2>Quelques petits trésors<br><em>cachés pour toi</em></h2></div><div class="surprise-grid"><article class="surprise-card"><span class="card-icon">✦</span><h3>Un message du hasard</h3><p id="randomMessage">Clique pour recevoir un peu de douceur.</p><button class="outline" id="randomBtn">Révéler un message</button></article><article class="surprise-card"><span class="card-icon">?</span><h3>Le quiz de notre complicité</h3><p id="quizQuestion">Quelle est la meilleure réponse ?</p><div id="quizAnswers" class="answers"></div><p id="quizScore" class="score"></p></article><article class="surprise-card counter-card"><span class="card-icon">∞</span><h3>Notre compteur symbolique</h3><div class="counter"><strong>∞</strong><span>fous rires à venir</span></div><button class="outline" id="heartBtn">Ajouter un souvenir <span>♡</span></button><p id="heartCount">0 souvenir ajouté aujourd'hui</p></article><article class="surprise-card"><span class="card-icon">☽</span><h3>Le mur de compliments</h3><div class="compliments" id="compliments"><button>Tu es solaire</button><button>Tu es rare</button><button>Tu es courageuse</button><button>Tu es inoubliable</button></div></article></div></section>
 
-    <section class="panel universe-panel" id="universe" aria-labelledby="universe-title">
-      <div class="section-heading"><p class="eyebrow">Notre petit univers</p><h2 id="universe-title">Ces moments qui n'existent<br><em>que dans notre histoire</em></h2></div>
-      <div class="memory-grid">
-        <figure class="memory memory-tall"><div class="photo-placeholder"><span>Ajouter une photo</span></div><figcaption><b>01</b><span>Le fou rire qu'on n'oubliera jamais</span></figcaption></figure>
-        <figure class="memory"><div class="photo-placeholder"><span>Ajouter une photo</span></div><figcaption><b>02</b><span>Ce jour-là, tout semblait simple</span></figcaption></figure>
-        <figure class="memory"><div class="photo-placeholder"><span>Ajouter une photo</span></div><figcaption><b>03</b><span>Notre langue secrète</span></figcaption></figure>
-      </div>
-    </section>
+    <section id="universe" class="section universe"><div class="section-intro"><p class="eyebrow">04 — L'UNIVERS DE FLORE</p><h2>Une galaxie qui n'existe<br><em>que pour toi</em></h2><p>Explore les six planètes. La planète secrète se révélera quand les cinq premières auront livré leur histoire.</p></div><div class="space-map"><div class="orbit orbit-a"></div><div class="orbit orbit-b"></div><button class="planet planet-core" data-planet="flore"><span>F</span><small>FLORE</small></button><div class="planet-list"><button class="planet" data-planet="complicite"><i>✦</i><b>Complicité</b><small>nos délires</small></button><button class="planet" data-planet="souvenirs"><i>◌</i><b>Souvenirs</b><small>nos histoires</small></button><button class="planet" data-planet="amitie"><i>♡</i><b>Amitié</b><small>notre lien</small></button><button class="planet" data-planet="bonheur"><i>☼</i><b>Bonheur</b><small>tes petits mots</small></button><button class="planet" data-planet="avenir"><i>↗</i><b>Avenir</b><small>nos promesses</small></button><button class="planet locked" id="secretPlanet" data-planet="secret" disabled><i>?</i><b>Secret</b><small>à débloquer</small></button></div></div><div id="planetModal" class="planet-modal" role="dialog" aria-modal="true" aria-hidden="true"><div class="modal-box"><button class="modal-close" aria-label="Fermer">×</button><p class="eyebrow" id="modalKicker"></p><h3 id="modalTitle"></h3><p id="modalText"></p><button class="primary" id="modalNext">Fermer la planète</button></div></div></section>
 
-    <section class="panel secret-panel" id="secret" aria-labelledby="secret-title">
-      <button class="secret-button" id="secretButton" type="button">
-        <span>Tu pensais vraiment que c'était terminé ?</span><i>Ouvrir la surprise secrète</i>
-      </button>
-      <div class="secret-message" id="secretMessage" aria-hidden="true">
-        <div class="secret-orbit" aria-hidden="true"><span>TOI</span></div>
-        <p class="eyebrow">Dernier secret</p>
-        <h2 id="secret-title">Tu es une des plus belles<br>choses qui me soient arrivées.</h2>
-        <p>Merci d'exister exactement comme tu es. Même les étoiles seraient jalouses de ton éclat.</p>
-      </div>
-    </section>
+    <section id="gifts" class="section gifts"><div class="section-intro"><p class="eyebrow">05 — LA DERNIÈRE GRANDE PARTIE</p><h2>J'ai encore quelques<br><em>surprises pour toi...</em></h2><p>Ouvre-les dans l'ordre que tu veux. Il y en a <b>8</b>, et chacune cache une pensée.</p></div><div class="gift-progress"><span id="giftProgress">0</span> / 8 cadeaux découverts <div><i id="progressBar"></i></div></div><div id="giftGrid" class="gift-grid"></div></section>
 
-    <section class="panel finale-panel" id="finale" aria-labelledby="finale-title">
-      <div class="finale-light"></div>
-      <div class="finale-content">
-        <p class="eyebrow">Aujourd'hui et toujours</p>
-        <h2 id="finale-title"><span>Happy birthday</span><strong>FLORE</strong></h2>
-        <p>À ma moitié, ma sœur d'une autre mère, mon irremplaçable personne.<br>Que cette nouvelle année t'apporte autant de bonheur que tu en apportes autour de toi. <b>Je t'aime fort. ♡</b></p>
-        <button class="primary dark" id="celebrate" type="button">Célébrer encore un peu ✦</button>
-      </div>
-    </section>
+    <section id="finale" class="finale section-dark" aria-labelledby="finalTitle"><div class="finale-glow"></div><p class="eyebrow">LE POINT CULMINANT</p><h2 id="finalTitle"><span>Happy birthday</span><strong>FLORE</strong> <b>♡</b></h2><p>À ma moitié, ma sœur d'une autre mère, ma personne spéciale.<br>Que ta nouvelle année soit aussi lumineuse que toi.<br><em>Je t'aime fort.</em></p><button id="celebrate" class="primary">Faire briller le ciel ✦</button><p class="final-note">Cette expérience a été créée spécialement pour toi.</p></section>
   </main>
-
-  <nav class="chapter-nav" aria-label="Navigation des chapitres">
-    <button type="button" data-go="home">Accueil</button><button type="button" data-go="gift">Cadeau</button><button type="button" data-go="letter">Lettre</button><button type="button" data-go="reasons">10 raisons</button><button type="button" data-go="universe">Souvenirs</button><button type="button" data-go="secret">Secret</button><button type="button" data-go="finale">Final</button>
-  </nav>
+  <audio id="music" loop src="assets/music.mp3"></audio>
+  <div id="toast" role="status" aria-live="polite"></div>
   <script src="script.js"></script>
-  <script src="extras.js"></script>
-</body>
-</html>
+</body></html>

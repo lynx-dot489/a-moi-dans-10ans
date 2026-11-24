@@ -1,68 +1,15 @@
-(()=>{'use strict';
-const panels=[...document.querySelectorAll('.panel')];
-const navButtons=[...document.querySelectorAll('.chapter-nav button')];
-const ids=['home','gift','letter','reasons','universe','secret','finale'];
-
-function go(id){
-  const target=document.getElementById(id); if(!target)return;
-  panels.forEach(p=>p.classList.toggle('active',p===target));
-  navButtons.forEach(b=>b.classList.toggle('active',b.dataset.go===id));
-  window.scrollTo({top:0,behavior:'smooth'});
-  target.queryScroll?.();
-  if(id==='finale')celebrate(55);
-}
-document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go)));
-
-const giftBox=document.getElementById('giftBox');
-function openGift(){
-  if(giftBox.classList.contains('open'))return;
-  giftBox.classList.add('open');
-  document.getElementById('giftHint').textContent='Une petite surprise vient de s’allumer...';
-  celebrate(34);
-  setTimeout(()=>go('letter'),1500);
-}
-giftBox.addEventListener('click',openGift);
-
-const envelope=document.getElementById('envelope');
-const letter=document.getElementById('letterPaper');
-function openEnvelope(){envelope.classList.add('open');letter.classList.add('open');envelope.setAttribute('aria-expanded','true')}
-envelope.addEventListener('click',openEnvelope);
-document.querySelector('.close-letter').addEventListener('click',()=>{letter.classList.remove('open');setTimeout(()=>envelope.classList.remove('open'),300)});
-letter.querySelector('.letter-copy').addEventListener('dblclick',()=>go('reasons'));letter.addEventListener('wheel',(e)=>{if(e.deltaY>0&&letter.scrollTop+letter.clientHeight>=letter.scrollHeight-20)setTimeout(()=>go('reasons'),700)},{passive:true});
-
-const reasons=[
- ['Tu es mon soleil','Même en journée pluvieuse, tu trouves le moyen de faire revenir un rayon.'],
- ['Ton rire est contagieux','Une vraie sonnette d’alarme contre les mauvaises journées.'],
- ['Tu sais écouter','Pas seulement avec les oreilles. Avec tout ce que tu es.'],
- ['Tu es honnête','Tu dis les choses avec cette franchise douce qui fait grandir.'],
- ['Tu transformes l’ordinaire','Même une simple conversation devient une histoire à raconter.'],
- ['Tu es courageuse','Même quand personne ne voit les batailles que tu dois gagner.'],
- ['Tu es profondément vraie','Dans un monde qui joue des rôles, tu restes merveilleusement toi.'],
- ['Tu sais rendre heureux','Souvent sans le savoir, juste avec ta façon d’exister.'],
- ['Tu es ma personne','La phrase est simple. La valeur qu’elle porte ne l’est pas.'],
- ['Tu es irremplaçable','Parce qu’il n’existe qu’une seule Flore — heureusement pour nous.']
-];
-const grid=document.getElementById('reasonGrid');
-reasons.forEach((r,i)=>{const b=document.createElement('button');b.className='reason-card';b.type='button';b.setAttribute('aria-label','Retourner la raison '+(i+1));b.innerHTML=`<div class="reason-inner"><div class="reason-front"><span>${String(i+1).padStart(2,'0')}</span><strong>${r[0]}</strong></div><div class="reason-back">${r[1]}</div></div>`;b.addEventListener('click',()=>b.classList.toggle('flipped'));grid.appendChild(b)});
-
-const secretButton=document.getElementById('secretButton');
-const secretMessage=document.getElementById('secretMessage');
-secretButton.addEventListener('click',()=>{secretButton.classList.add('open');secretMessage.classList.add('open');secretMessage.setAttribute('aria-hidden','false');document.querySelector('.secret-panel').style.background='linear-gradient(135deg,#2f2526,#52383a)';celebrate(40)});
-
-const music=document.getElementById('music');
-const musicToggle=document.getElementById('musicToggle');
-const volume=document.getElementById('volume');music.volume=Number(volume.value);
-volume.addEventListener('input',()=>music.volume=Number(volume.value));
-musicToggle.addEventListener('click',async()=>{try{if(music.paused){await music.play();musicToggle.classList.add('playing');musicToggle.setAttribute('aria-pressed','true');musicToggle.setAttribute('aria-label','Mettre la musique en pause')}else{music.pause();musicToggle.classList.remove('playing');musicToggle.setAttribute('aria-pressed','false');musicToggle.setAttribute('aria-label','Activer la musique')}}catch(e){musicToggle.title='Ajoute ton fichier assets/music.mp3'}});
-
-const canvas=document.getElementById('petals');const ctx=canvas.getContext('2d');let petals=[];
-function sizeCanvas(){canvas.width=innerWidth*devicePixelRatio;canvas.height=innerHeight*devicePixelRatio;ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0)}sizeCanvas();addEventListener('resize',sizeCanvas);
-function petal(){return{x:Math.random()*innerWidth,y:-20,vy:.35+Math.random()*1.1,vx:(Math.random()-.5)*.45,size:5+Math.random()*7,angle:Math.random()*6.28,spin:(Math.random()-.5)*.05,life:0}} 
-function animate(){ctx.clearRect(0,0,innerWidth,innerHeight);petals.forEach(p=>{p.y+=p.vy;p.x+=p.vx;p.angle+=p.spin;p.life++;ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.angle);ctx.fillStyle='rgba(220,158,167,.38)';ctx.beginPath();ctx.ellipse(0,0,p.size,p.size*.55,0,0,Math.PI*2);ctx.fill();ctx.restore()});petals=petals.filter(p=>p.y<innerHeight+30&&p.life<900);requestAnimationFrame(animate)}
-const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;if(!reduced)setInterval(()=>{if(petals.length<18&&document.getElementById('home').classList.contains('active'))petals.push(petal())},600);animate();
-
-function celebrate(amount){if(reduced)return;for(let i=0;i<amount;i++){setTimeout(()=>{const p=document.createElement('i');p.style.cssText=`position:fixed;z-index:100;left:${30+Math.random()*40}%;top:45%;width:${3+Math.random()*5}px;height:${7+Math.random()*8}px;border-radius:70%;background:${['#d9a75f','#c98790','#fff4ec','#9d626b'][i%4]};pointer-events:none`;const dx=(Math.random()-.5)*innerWidth*.8,dy=-180-Math.random()*innerHeight*.7;p.animate([{transform:'translate(0,0) rotate(0)',opacity:1},{transform:`translate(${dx}px,${dy}px) rotate(${Math.random()*720-360}deg)`,opacity:0}],{duration:1800+Math.random()*900,easing:'cubic-bezier(.1,.7,.2,1)',fill:'forwards'});p.addEventListener('animationend',()=>p.remove());document.body.appendChild(p)},i*12)}}
-document.getElementById('celebrate').addEventListener('click',()=>celebrate(80));
-
-navButtons[0].classList.add('active');
+(() => {'use strict';
+const $=(s,p=document)=>p.querySelector(s), $$=(s,p=document)=>[...p.querySelectorAll(s)];
+const scrollTo=(id)=>$(id)?.scrollIntoView({behavior:'smooth'}); $$('[data-scroll]').forEach(b=>b.addEventListener('click',()=>scrollTo(b.dataset.scroll)));
+const toast=(text)=>{const t=$('#toast');t.textContent=text;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2600)};
+$('#menuToggle').addEventListener('click',()=>$('#siteNav').classList.toggle('open')); $$('#siteNav a').forEach(a=>a.addEventListener('click',()=>$('#siteNav').classList.remove('open')));
+const envelope=$('#envelope'), letter=$('#letterPaper'); envelope.addEventListener('click',()=>{envelope.classList.add('open');letter.classList.add('open');envelope.setAttribute('aria-expanded','true');setTimeout(()=>letter.querySelector('.continue').focus(),700)});
+const reasons=[['Tu es mon soleil','Même les journées grises trouvent leur éclaircie avec toi.'],['Ton rire est contagieux','Une vraie protection contre les mauvaises journées.'],['Tu sais écouter','Avec tes oreilles, ton cœur et toute ta présence.'],['Tu es honnête','Cette franchise douce qui fait toujours grandir.'],['Tu transformes l’ordinaire','Avec toi, une conversation devient une aventure.'],['Tu es courageuse','Même quand personne ne voit les batailles gagnées.'],['Tu es profondément vraie','Tu restes merveilleusement toi, quoi qu’il arrive.'],['Tu sais rendre heureux','Souvent sans le savoir, juste avec ta façon d’exister.'],['Tu es ma personne','Une phrase simple, une valeur infinie.'],['Tu es irremplaçable','Il n’existe qu’une seule Flore. Et c’est parfait ainsi.']];
+reasons.forEach(([title,text],i)=>{const b=document.createElement('button');b.className='reason-card';b.type='button';b.innerHTML=`<span class="number">${String(i+1).padStart(2,'0')}</span><h3>${title}</h3><p>${text}</p>`;b.addEventListener('click',()=>b.classList.toggle('revealed'));$('#reasonGrid').append(b)});
+const messages=['Tu rends les choses plus légères, sans même essayer.','Le monde a beaucoup de chance de t’avoir.','Promis, je serai toujours là pour nos prochains fous rires.','Tu es une maison dans les jours où tout bouge.','Aujourd’hui, rappelle-toi que tu es profondément aimée.'];let mi=0;$('#randomBtn').addEventListener('click',()=>{$('#randomMessage').textContent=messages[mi++%messages.length];toast('Un petit mot rien que pour toi ✦')});
+const quiz=[['Qui gagne toujours nos débats ?',['Nous deux, évidemment','Flore (mais chut)','La personne la plus têtue']],['Quelle est notre super-pouvoir ?',['Se comprendre sans parler','Rire au mauvais moment','Les deux, évidemment']],['Notre programme idéal ?',['Une aventure improvisée','Un fou rire','Tout ce qui nous réunit']]];let qi=0,score=0;function loadQuiz(){const [q,a]=quiz[qi%quiz.length];$('#quizQuestion').textContent=q;$('#quizAnswers').innerHTML='';a.forEach((x,i)=>{const b=document.createElement('button');b.textContent=x;b.onclick=()=>{score++;$('#quizScore').textContent=`${score} réponse${score>1?'s':''} parfaite${score>1?'s':''} ✦`;qi++;loadQuiz()};$('#quizAnswers').append(b)})}loadQuiz();let hearts=0;$('#heartBtn').addEventListener('click',()=>{$('#heartCount').textContent=`${++hearts} souvenir${hearts>1?'s':''} ajouté${hearts>1?'s':''} aujourd'hui ♡`});$$('.compliments button').forEach(b=>b.addEventListener('click',()=>toast(b.textContent+' — c’est vrai ✨')));
+const planets={flore:['Le cœur de cette galaxie','La planète Flore','Tu es le centre de cet univers, celle qui donne de la couleur, de la chaleur et du sens à tout ce qui l’entoure.'],complicite:['Planète 01','Ici vivent nos blagues que personne ne comprend, nos regards complices et nos plans improvisés.'],souvenirs:['Planète 02','Chaque souvenir est une petite étoile. Même sans photo, je me souviens de la sensation : nous, simplement heureuses.'],amitie:['Planète 03','Notre lien est fait de confiance, de vérité et de cette certitude tranquille que nous pouvons toujours compter l’une sur l’autre.'],bonheur:['Planète 04','Message reçu : tu mérites des matins doux, des bonnes nouvelles et des raisons de rire tous les jours.'],avenir:['Planète 05','Je nous souhaite encore mille projets, des rêves réalisés et beaucoup de pages à écrire ensemble.'],secret:['Planète secrète','Le plus beau secret ? Peu importe la distance ou le temps : tu auras toujours une place immense dans mon cœur.']};let visited=new Set();const modal=$('#planetModal');$$('[data-planet]').forEach(b=>b.addEventListener('click',()=>{const key=b.dataset.planet;if(b.disabled)return;visited.add(key);const [k,t,x]=planets[key];$('#modalKicker').textContent=k;$('#modalTitle').textContent=t;$('#modalText').textContent=x;modal.classList.add('open');modal.setAttribute('aria-hidden','false');if(visited.size>=5){$('#secretPlanet').disabled=false;$('#secretPlanet').classList.remove('locked');toast('Une nouvelle planète vient de s’allumer ✦')}}));function closeModal(){modal.classList.remove('open');modal.setAttribute('aria-hidden','true')}$('.modal-close').addEventListener('click',closeModal);$('#modalNext').addEventListener('click',closeModal);modal.addEventListener('click',e=>{if(e.target===modal)closeModal()});
+const gifts=[['Une lettre supplémentaire','Je choisirais encore et encore de t’avoir dans ma vie.'],['Le diplôme officiel','Diplôme de personne la plus précieuse — mention très bien.'],['Un poème','Ton rire est une lumière, ton cœur une maison, Flore est un prénom qui rime avec émotion.'],['La promesse','Promis : je serai là pour les grands projets et les petits cafés.'],['Le message futur','Dans dix ans, j’espère que tu souriras en lisant ceci. Je serai fière de toi, comme aujourd’hui.'],['La surprise musicale','Cette piste imaginaire est dédiée à tous nos prochains pas de danse.'],['Le coupon magique','Bon pour un fou rire, une écoute sans jugement et une présence immédiate.'],['Le cadeau mystère','Le vrai cadeau, c’est la place que tu as prise dans ma vie. Elle est à toi pour toujours.']];let opened=0;gifts.forEach(([title,text],i)=>{const card=document.createElement('button');card.className='gift-card';card.type='button';card.innerHTML=`<span class="gift-inner"><span class="gift-front"><b>CADEAU ${String(i+1).padStart(2,'0')}</b></span><span class="gift-back"><strong>${title}<br><small>${text}</small></strong></span></span>`;card.addEventListener('click',()=>{if(!card.classList.contains('open')){card.classList.add('open');opened++;$('#giftProgress').textContent=opened;$('#progressBar').style.width=`${opened/8*100}%`;toast('Cadeau découvert ✦');if(opened===8){$('#finale').classList.add('unlocked');setTimeout(()=>scrollTo('#finale'),700)}}});$('#giftGrid').append(card)});
+const music=$('#music');$('#musicToggle').addEventListener('click',async()=>{try{if(music.paused){await music.play();$('#musicToggle').textContent='Ⅱ';$('#musicToggle').setAttribute('aria-pressed','true')}else{music.pause();$('#musicToggle').textContent='♪';$('#musicToggle').setAttribute('aria-pressed','false')}}catch{toast('Ajoute assets/music.mp3 pour activer la mélodie')}});
+const canvas=$('#confetti'),ctx=canvas.getContext('2d');let bits=[];function resize(){canvas.width=innerWidth;canvas.height=innerHeight}resize();addEventListener('resize',resize);function celebrate(){for(let i=0;i<130;i++)bits.push({x:innerWidth/2,y:innerHeight*.45,vx:(Math.random()-.5)*12,vy:-Math.random()*12-3,c:['#edc879','#efb8c5','#fff','#a878bd'][Math.floor(Math.random()*4)],life:0})}function loop(){ctx.clearRect(0,0,canvas.width,canvas.height);bits=bits.filter(p=>p.life++<150);bits.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.22;ctx.fillStyle=p.c;ctx.fillRect(p.x,p.y,5,9)});requestAnimationFrame(loop)}loop();$('#celebrate').addEventListener('click',()=>{celebrate();toast('Le ciel est à toi, Flore ✦')});
 })();

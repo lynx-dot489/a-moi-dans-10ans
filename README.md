@@ -1,47 +1,25 @@
 # Pour Flore ♡
 
-Une expérience d'anniversaire interactive, créée spécialement pour une personne exceptionnelle.
+Une expérience d'anniversaire interactive et publique, créée spécialement pour Flore.
 
-## Expérience incluse
+## Parcours
 
-- accueil avec prénom animé et pétales
-- cadeau virtuel à ouvrir
-- lettre avec enveloppe interactive
-- dix cartes retournables et personnalisables
-- galerie artistique pour les souvenirs
-- surprise secrète émotionnelle
-- grand final avec célébration
-- musique facultative, lancée seulement après un clic
-- navigation clavier avec les touches gauche/droite
-- préférences de mouvement réduit prises en compte
-- mise en page adaptée aux mobiles, tablettes et ordinateurs
+1. Introduction cinématographique
+2. Lettre personnelle avec enveloppe interactive et bouton « Continuer notre aventure ✨ »
+3. Dix raisons révélées par cartes
+4. Surprises : messages, quiz, compteur symbolique et mur de compliments
+5. Univers de Flore : six planètes interactives, dont une planète secrète déverrouillable
+6. Huit cadeaux ouvrables librement avec progression
+7. Grand final « HAPPY BIRTHDAY FLORE » avec confettis
 
-## Ajouter la musique
+Le site ne demande aucune authentification et le dépôt est public. Il fonctionne comme un site statique : aucun backend ni secret n'est utilisé.
 
-Placez un fichier MP3 dans :
+## Musique facultative
 
-```text
-assets/music.mp3
-```
-
-Puis cliquez sur le bouton rond « Notre mélodie » sur le site.
-
-## Ajouter des photos
-
-Placez les images dans `assets/`, puis remplacez les blocs `.photo-placeholder` dans `index.html` par :
-
-```html
-<img src="assets/photo-1.jpg" alt="Notre souvenir">
-```
-
-Ajoutez ensuite une légende dans l'élément `<span>` suivant.
-
-## Modifier les textes
-
-- Le message principal se trouve dans `index.html`.
-- Les dix raisons sont dans le tableau `reasons` de `script.js`.
-- Les couleurs principales sont dans les variables au début de `styles.css`.
+Ajoutez un fichier `assets/music.mp3` si vous souhaitez activer le bouton de musique. La lecture ne démarre qu'après une action de l'utilisateur.
 
 ## Publication
 
-Activez GitHub Pages depuis **Settings → Pages**, puis choisissez la branche `main` et le dossier `/ (root)`.
+Le dépôt peut être publié avec GitHub Pages depuis **Settings → Pages**, en sélectionnant la branche de publication et le dossier `/ (root)`. Toute personne disposant de l'URL publique pourra consulter l'expérience sans compte GitHub.
+
+Les animations respectent `prefers-reduced-motion` et l'interface est conçue pour les écrans mobiles, tactiles et desktop.
