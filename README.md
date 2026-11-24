@@ -1,37 +1,47 @@
 # Pour Flore ♡
 
-Une expérience web d'anniversaire immersive, élégante et entièrement responsive.
+Une expérience d'anniversaire interactive, créée spécialement pour une personne exceptionnelle.
 
-## Aperçu
+## Expérience incluse
 
-- Écran d'accueil cinématographique
-- Cadeau animé
-- Lettre manuscrite interactive
-- Dix cartes retournables
-- Univers de souvenirs personnalisables
-- Surprise secrète
-- Final célébratoire
-- Lecteur musical au lancement utilisateur
+- accueil avec prénom animé et pétales
+- cadeau virtuel à ouvrir
+- lettre avec enveloppe interactive
+- dix cartes retournables et personnalisables
+- galerie artistique pour les souvenirs
+- surprise secrète émotionnelle
+- grand final avec célébration
+- musique facultative, lancée seulement après un clic
+- navigation clavier avec les touches gauche/droite
+- préférences de mouvement réduit prises en compte
+- mise en page adaptée aux mobiles, tablettes et ordinateurs
 
-## Personnalisation
+## Ajouter la musique
 
-### Musique
-Ajoutez votre fichier audio personnel ici :
+Placez un fichier MP3 dans :
 
-`assets/music.mp3`
+```text
+assets/music.mp3
+```
 
-GitHub Pages ou tout hébergeur statique pourra lire ce fichier sans configuration.
+Puis cliquez sur le bouton rond « Notre mélodie » sur le site.
 
-### Textes
-- Tous les textes principaux sont dans `index.html`.
+## Ajouter des photos
+
+Placez les images dans `assets/`, puis remplacez les blocs `.photo-placeholder` dans `index.html` par :
+
+```html
+<img src="assets/photo-1.jpg" alt="Notre souvenir">
+```
+
+Ajoutez ensuite une légende dans l'élément `<span>` suivant.
+
+## Modifier les textes
+
+- Le message principal se trouve dans `index.html`.
 - Les dix raisons sont dans le tableau `reasons` de `script.js`.
-- Un emplacement pour photos est prévu dans la section « Notre petit univers ».
+- Les couleurs principales sont dans les variables au début de `styles.css`.
 
-### Photos
-Remplacez les blocs `.photo-placeholder` dans `index.html` par des balises `<img src="assets/photo-1.jpg" alt="...">`.
+## Publication
 
-## Affichage local
-
-Ouvrez simplement `index.html` dans un navigateur moderne.
-
-Pour utiliser la musique, placez un fichier MP3 à `assets/music.mp3`, puis cliquez sur le bouton rond dans la barre supérieure. Les restrictions des navigateurs empêchent une lecture automatique.
+Activez GitHub Pages depuis **Settings → Pages**, puis choisissez la branche `main` et le dossier `/ (root)`.
